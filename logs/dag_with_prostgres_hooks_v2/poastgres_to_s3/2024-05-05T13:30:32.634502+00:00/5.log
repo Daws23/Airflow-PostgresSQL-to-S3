@@ -1,0 +1,73 @@
+[2024-05-05 13:38:45,767] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-05-05T13:30:32.634502+00:00 [queued]>
+[2024-05-05 13:38:45,787] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-05-05T13:30:32.634502+00:00 [queued]>
+[2024-05-05 13:38:45,788] {taskinstance.py:1042} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 13:38:45,789] {taskinstance.py:1043} INFO - Starting attempt 5 of 6
+[2024-05-05 13:38:45,790] {taskinstance.py:1044} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 13:38:45,802] {taskinstance.py:1063} INFO - Executing <Task(PythonOperator): poastgres_to_s3> on 2024-05-05T13:30:32.634502+00:00
+[2024-05-05 13:38:45,808] {standard_task_runner.py:52} INFO - Started process 6963 to run task
+[2024-05-05 13:38:45,811] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'dag_with_prostgres_hooks_v2', 'poastgres_to_s3', '2024-05-05T13:30:32.634502+00:00', '--job-id', '54', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/dag_with_postgres_hooks.py', '--cfg-path', '/tmp/tmpv67cw2xv', '--error-file', '/tmp/tmpzfs_360b']
+[2024-05-05 13:38:45,814] {standard_task_runner.py:77} INFO - Job 54: Subtask poastgres_to_s3
+[2024-05-05 13:38:45,870] {logging_mixin.py:104} INFO - Running <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-05-05T13:30:32.634502+00:00 [running]> on host d4a0c764ecae
+[2024-05-05 13:38:45,912] {taskinstance.py:1257} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Mark
+AIRFLOW_CTX_DAG_ID=dag_with_prostgres_hooks_v2
+AIRFLOW_CTX_TASK_ID=poastgres_to_s3
+AIRFLOW_CTX_EXECUTION_DATE=2024-05-05T13:30:32.634502+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2024-05-05T13:30:32.634502+00:00
+[2024-05-05 13:38:45,922] {base.py:74} INFO - Using connection to: id: postgres_localhost. Host: host.docker.internal, Port: 5432, Schema: test, Login: airflow, Password: XXXXXXXX, extra: None
+[2024-05-05 13:38:45,947] {dag_with_postgres_hooks.py:32} INFO - Saved orders data in text file: dags/get_orders_20240505.txt
+[2024-05-05 13:38:45,948] {base_aws.py:362} INFO - Airflow Connection: aws_conn_id=minio_conn
+[2024-05-05 13:38:45,956] {base.py:74} INFO - Using connection to: id: minio_conn. Host: host.docker.internal, Port: 9000, Schema: , Login: ROOTUSER, Password: XXXXXXXX, extra: None
+[2024-05-05 13:38:45,956] {base_aws.py:160} INFO - Credentials retrieved from login
+[2024-05-05 13:38:45,957] {base_aws.py:81} INFO - Creating session with aws_access_key_id=ROOTUSER region_name=None
+[2024-05-05 13:38:45,967] {base_aws.py:151} INFO - role_arn is None
+[2024-05-05 13:38:47,745] {taskinstance.py:1455} ERROR - Failed to upload /tmp/tmpg_dzo7mc20240505 to airflow/orders/20240505.txt: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/boto3/s3/transfer.py", line 279, in upload_file
+    future.result()
+  File "/home/airflow/.local/lib/python3.6/site-packages/s3transfer/futures.py", line 106, in result
+    return self._coordinator.result()
+  File "/home/airflow/.local/lib/python3.6/site-packages/s3transfer/futures.py", line 265, in result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.6/site-packages/s3transfer/tasks.py", line 126, in __call__
+    return self._execute_main(kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/s3transfer/tasks.py", line 150, in _execute_main
+    return_value = self._main(**kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/s3transfer/upload.py", line 692, in _main
+    client.put_object(Bucket=bucket, Key=key, Body=body, **extra_args)
+  File "/home/airflow/.local/lib/python3.6/site-packages/botocore/client.py", line 357, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/botocore/client.py", line 676, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1112, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1285, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1315, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 117, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/python.py", line 128, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_with_postgres_hooks.py", line 39, in postgres_to_S3
+    replace=True
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 61, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 90, in wrapper
+    return func(*bound_args.args, **bound_args.kwargs)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 505, in load_file
+    client.upload_file(filename, bucket_name, key, ExtraArgs=extra_args)
+  File "/home/airflow/.local/lib/python3.6/site-packages/boto3/s3/inject.py", line 131, in upload_file
+    extra_args=ExtraArgs, callback=Callback)
+  File "/home/airflow/.local/lib/python3.6/site-packages/boto3/s3/transfer.py", line 287, in upload_file
+    filename, '/'.join([bucket, key]), e))
+boto3.exceptions.S3UploadFailedError: Failed to upload /tmp/tmpg_dzo7mc20240505 to airflow/orders/20240505.txt: An error occurred (InvalidAccessKeyId) when calling the PutObject operation: The AWS Access Key Id you provided does not exist in our records.
+[2024-05-05 13:38:47,762] {taskinstance.py:1503} INFO - Marking task as UP_FOR_RETRY. dag_id=dag_with_prostgres_hooks_v2, task_id=poastgres_to_s3, execution_date=20240505T133032, start_date=20240505T133845, end_date=20240505T133847
+[2024-05-05 13:38:47,800] {local_task_job.py:146} INFO - Task exited with return code 1

@@ -1,0 +1,29 @@
+[2024-05-05 13:49:35,937] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-04-02T00:00:00+00:00 [queued]>
+[2024-05-05 13:49:35,994] {taskinstance.py:851} INFO - Dependencies all met for <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-04-02T00:00:00+00:00 [queued]>
+[2024-05-05 13:49:35,999] {taskinstance.py:1042} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 13:49:36,002] {taskinstance.py:1043} INFO - Starting attempt 1 of 6
+[2024-05-05 13:49:36,002] {taskinstance.py:1044} INFO - 
+--------------------------------------------------------------------------------
+[2024-05-05 13:49:36,055] {taskinstance.py:1063} INFO - Executing <Task(PythonOperator): poastgres_to_s3> on 2024-04-02T00:00:00+00:00
+[2024-05-05 13:49:36,068] {standard_task_runner.py:52} INFO - Started process 7775 to run task
+[2024-05-05 13:49:36,084] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'dag_with_prostgres_hooks_v2', 'poastgres_to_s3', '2024-04-02T00:00:00+00:00', '--job-id', '102', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/dag_with_postgres_hooks.py', '--cfg-path', '/tmp/tmp_2pbot3l', '--error-file', '/tmp/tmptgum_n68']
+[2024-05-05 13:49:36,093] {standard_task_runner.py:77} INFO - Job 102: Subtask poastgres_to_s3
+[2024-05-05 13:49:36,265] {logging_mixin.py:104} INFO - Running <TaskInstance: dag_with_prostgres_hooks_v2.poastgres_to_s3 2024-04-02T00:00:00+00:00 [running]> on host d4a0c764ecae
+[2024-05-05 13:49:36,394] {taskinstance.py:1257} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Mark
+AIRFLOW_CTX_DAG_ID=dag_with_prostgres_hooks_v2
+AIRFLOW_CTX_TASK_ID=poastgres_to_s3
+AIRFLOW_CTX_EXECUTION_DATE=2024-04-02T00:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2024-04-02T00:00:00+00:00
+[2024-05-05 13:49:36,465] {base.py:74} INFO - Using connection to: id: postgres_localhost. Host: host.docker.internal, Port: 5432, Schema: test, Login: airflow, Password: XXXXXXXX, extra: None
+[2024-05-05 13:49:36,513] {dag_with_postgres_hooks.py:32} INFO - Saved orders data in text file: dags/get_orders_20240402.txt
+[2024-05-05 13:49:36,518] {base_aws.py:362} INFO - Airflow Connection: aws_conn_id=minio_conn
+[2024-05-05 13:49:36,544] {base_aws.py:164} INFO - Credentials retrieved from extra_config
+[2024-05-05 13:49:36,546] {base_aws.py:81} INFO - Creating session with aws_access_key_id=ROOTUSER region_name=None
+[2024-05-05 13:49:36,607] {base_aws.py:151} INFO - role_arn is None
+[2024-05-05 13:49:36,790] {dag_with_postgres_hooks.py:41} INFO - Orders file /tmp/tmp8jcx8kc520240402 has been pushed to S3!
+[2024-05-05 13:49:36,794] {python.py:118} INFO - Done. Returned value was: None
+[2024-05-05 13:49:36,820] {taskinstance.py:1166} INFO - Marking task as SUCCESS. dag_id=dag_with_prostgres_hooks_v2, task_id=poastgres_to_s3, execution_date=20240402T000000, start_date=20240505T134935, end_date=20240505T134936
+[2024-05-05 13:49:36,937] {taskinstance.py:1220} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-05 13:49:37,001] {local_task_job.py:146} INFO - Task exited with return code 0
